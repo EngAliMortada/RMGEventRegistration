@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RMG.EventRegistration.Result
+namespace RMG.EventRegistration.Results
 {
     public class Result
     {
@@ -77,6 +77,25 @@ namespace RMG.EventRegistration.Result
             ErrorMessage = $"{objectName} {ErrorContants.IsNull}";
         }
     }
+
+    public class FailedRequiredResult<T> : FailedResult<T>
+    {
+        public FailedRequiredResult(string objectName)
+        {
+            ErrorCode = $"{objectName}{ErrorContants.RequiredCode}";
+            ErrorMessage = $"{objectName} {ErrorContants.Required}";
+        }
+    }
+
+    public class FailedRequiredResult : FailedResult
+    {
+        public FailedRequiredResult(string objectName)
+        {
+            ErrorCode = $"{objectName}{ErrorContants.RequiredCode}";
+            ErrorMessage = $"{objectName} {ErrorContants.Required}";
+        }
+    }
+
 
     public class FailedNullResult : FailedResult
     {

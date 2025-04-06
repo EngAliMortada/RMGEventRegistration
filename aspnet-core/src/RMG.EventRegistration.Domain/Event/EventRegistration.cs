@@ -14,4 +14,20 @@ public class EventRegistration : AuditedEntity<Guid>
     public virtual IdentityUser User { get; protected set; }
     #endregion navigation properties
 
+    private EventRegistration(Guid eventId, Guid userId)
+    {
+        EventId = eventId;
+        UserId = userId;
+    }
+
+    protected EventRegistration()
+    {
+
+    }
+
+    public static EventRegistration Create(Guid eventId, Guid userId)
+    {
+        // no validation required
+        return new EventRegistration(eventId, userId);
+    }
 }
