@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RMG.EventRegistration.Events;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -53,6 +54,9 @@ public class EventRegistrationDbContext :
 
     #endregion
 
+    public DbSet<Event> Events { get; set; }
+    public DbSet<Registration> Registrations { get; set; }
+
     public EventRegistrationDbContext(DbContextOptions<EventRegistrationDbContext> options)
         : base(options)
     {
@@ -62,6 +66,28 @@ public class EventRegistrationDbContext :
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        base.OnModelCreating(builder);
+
+        builder.Entity<Event>(b =>
+        {
+            b.ToTable("Events");
+
+            b.HasMany(e => e.Registrations)
+                .WithOne(r => r.Event)
+                .HasForeignKey(r => r.EventId)
+                .IsRequired();
+        });
+
+        builder.Entity<Registration>(b =>
+        {
+            b.ToTable("Registrations");
+
+            b.HasOne(r => r.User)
+                .WithMany()
+                .HasForeignKey(r => r.UserId)
+                .IsRequired();
+        });
 
         /* Include modules to your migration db context */
 
