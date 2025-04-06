@@ -1,4 +1,4 @@
-﻿namespace RMG.EventRegistration.Event
+﻿namespace RMG.EventRegistration.Events
 {
     public struct EventValidationConstants
     {

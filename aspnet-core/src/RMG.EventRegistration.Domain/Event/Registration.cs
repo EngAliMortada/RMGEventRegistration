@@ -2,9 +2,9 @@
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.Identity;
 
-namespace RMG.EventRegistration.Event;
+namespace RMG.EventRegistration.Events;
 
-public class EventRegistration : AuditedEntity<Guid>
+public class Registration : FullAuditedEntity<Guid>
 {
     public Guid EventId { get; set; }
     public Guid UserId { get; set; }
@@ -14,20 +14,20 @@ public class EventRegistration : AuditedEntity<Guid>
     public virtual IdentityUser User { get; protected set; }
     #endregion navigation properties
 
-    private EventRegistration(Guid eventId, Guid userId)
+    private Registration(Guid eventId, Guid userId)
     {
         EventId = eventId;
         UserId = userId;
     }
 
-    protected EventRegistration()
+    protected Registration()
     {
 
     }
 
-    public static EventRegistration Create(Guid eventId, Guid userId)
+    public static Registration Create(Guid eventId, Guid userId)
     {
         // no validation required
-        return new EventRegistration(eventId, userId);
+        return new Registration(eventId, userId);
     }
 }

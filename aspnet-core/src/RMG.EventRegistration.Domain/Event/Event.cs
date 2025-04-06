@@ -1,10 +1,11 @@
 ﻿using RMG.EventRegistration.Extensions;
 using RMG.EventRegistration.Results;
 using System;
+using System.Collections.Generic;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.Identity;
 
-namespace RMG.EventRegistration.Event;
+namespace RMG.EventRegistration.Events;
 
 public class Event : FullAuditedAggregateRoot<Guid>
 {
@@ -20,6 +21,7 @@ public class Event : FullAuditedAggregateRoot<Guid>
 
     #region navigation
     public virtual IdentityUser? Organizer { get; set; }
+    public virtual ICollection<Registration> Registrations { get; set; }
     #endregion navigation
 
     private Event(string name,
