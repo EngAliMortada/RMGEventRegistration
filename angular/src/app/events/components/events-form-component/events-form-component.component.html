@@ -1,0 +1,158 @@
+<form [formGroup]="form">
+  <abp-card>
+    <abp-card-header>
+      <h4>{{ '::EventForm:Form' | abpLocalization }}</h4>
+    </abp-card-header>
+    
+    <abp-card-body>
+      <div class="row">
+        <!-- Name -->
+        <div class="col-6">
+          <div class="form-group">
+            <label for="name">{{ '::EventForm:Name' | abpLocalization }}</label>
+            <input type="text" id="name" class="form-control" formControlName="name" autofocus>
+            <small *ngIf="form.get('name').invalid && form.get('name').touched" class="text-danger">
+              {{ '::EventForm:NameRequired' | abpLocalization }}  
+            </small>
+          </div>
+        </div>
+
+        <!-- Capacity -->
+        <div *ngIf="form.get('isOnline').value == false" class="col-md-6">
+          <div class="form-group">
+            <label for="capacity">{{ '::EventForm:Capacity' | abpLocalization }}</label>
+            <input type="number" id="capacity" class="form-control" formControlName="capacity">
+            <small *ngIf="form.get('capacity').invalid && form.get('capacity').touched" class="text-danger">
+              {{ '::EventForm:MinimumCapacity' | abpLocalization }}  
+            </small>
+          </div>
+        </div>
+
+        <div class="col-6 mrgin-bottom-10">
+            <label for="startingDate">{{ '::EventForm:StartDate' | abpLocalization }}  </label>
+            <input
+            id="startingDate"
+            type="datetime-local"
+            class="form-control"
+            formControlName="startDate"
+            [min]="minStartDate"
+            (input)="handle($event)">
+        </div>
+        <br/>
+        <br/>
+            
+        <div class="col-6 mrgin-bottom-10">
+            <label for="endingDate">{{ '::EventForm:EndDate' | abpLocalization }}  </label>
+            <input
+            id="endingDate"
+            #endDateInput
+            type="datetime-local"
+            class="form-control"
+            formControlName="endDate"
+            [min]="minEndDate">
+        </div>
+
+        <br>
+
+
+        <ng-container *ngIf="form.get('isOnline').value; else locationField">
+          <!-- Link (for online events) -->
+          <div class="col-6">
+            <div class="form-group">
+              <label for="link">{{ '::EventForm:Link' | abpLocalization }} </label>
+              <input type="url" id="link" class="form-control" formControlName="link">
+              <small *ngIf="form.get('link').invalid && form.get('link').touched" class="text-danger">
+                {{ '::EventForm:LinkRequired' | abpLocalization }} 
+              </small>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #locationField>
+          <!-- Location (for physical events) -->
+          <div class="col-6">
+            <div class="form-group">
+              <label for="location">{{ '::EventForm:Location' | abpLocalization }} </label>
+              <input type="text" id="location" class="form-control" formControlName="location">
+              <small *ngIf="form.get('location').invalid && form.get('location').touched" class="text-danger">
+                {{ '::EventForm:LocationRequired' | abpLocalization }} 
+              </small>
+            </div>
+          </div>
+        </ng-template>
+
+        <!-- Online/Physical -->
+        <div class="col-md-6 custom-flex">
+          <input type="checkbox" formControlName="isOnline">
+          <label>{{ '::EventForm:Online' | abpLocalization }} </label>
+        </div>
+
+            <!-- Active Status -->
+          <div class="col-md-6 custom-flex">
+            <input type="checkbox" formControlName="isActive">
+            <label>{{ '::EventForm:Active' | abpLocalization }}</label>
+          </div>
+          
+        
+      </div>
+    </abp-card-body>
+
+    <abp-card-footer>
+      <button class="actionBtn backBtn" (click)="router.navigate(['/events'])">
+        {{ '::EventForm:Back' | abpLocalization }}
+      </button>
+ 
+      <button 
+        *ngIf="showSaveButton()"
+        [disabled]="disableSave()"
+        (click)="submit()"
+        class="actionBtn submitBtn">
+        <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+        {{ '::EventForm:Save' | abpLocalization }}
+      </button>
+      <button 
+      *ngIf="showUpdateButton()"
+      [disabled]="disableSave()"
+      (click)="submit()"
+      class="actionBtn submitBtn">
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+      {{ '::EventForm:Update' | abpLocalization }}
+    </button>
+      <button *ngIf="showCancelRegistrationButton()" (click)="cancelRegistration()" class="actionBtn cancelBtn">
+        {{ '::EventForm:CancelRegistration' | abpLocalization }}
+      </button>
+      <button *ngIf="showDeleteEventButton()" (click)="performDelete()" class="actionBtn deleteBtn">
+        {{ '::EventForm:Delete' | abpLocalization }}
+
+      </button>
+      <button *ngIf="showRegisterButton()" (click)="performRegister()" class="actionBtn registerBtn">
+          {{ '::EventForm:Register' | abpLocalization }}
+      </button>
+      <button *ngIf="RegisterdUsersButtonVisible()" (click)="getRegisteredUsers()" class="actionBtn registeredUsersBtn">
+        {{ '::EventForm:CheckUsers' | abpLocalization }}
+    </button>
+    
+    </abp-card-footer>
+  </abp-card>
+</form>
+
+<div class="table-container" *ngIf="registeredUsersVisible">
+  <table class="simple-data-table">
+    <thead>
+      <tr>
+        <th>{{ '::EventForm:Name' | abpLocalization }}</th>
+        <th>{{ '::EventForm:UserEmail' | abpLocalization }}</th>
+        <th>{{ '::EventForm:UserName' | abpLocalization }}</th>
+        <th>{{ '::EventForm:RegistrationDate' | abpLocalization }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of registeredUsers">
+        <td>{{user.name}}</td>
+        <td>{{user.userEmail}}</td>
+        <td>{{user.userName}}</td>
+        <td>{{user.registrationDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

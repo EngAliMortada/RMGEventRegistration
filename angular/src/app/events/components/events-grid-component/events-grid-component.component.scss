@@ -1,0 +1,53 @@
+/* event-card.component.scss */
+.event-card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    
+    .card-header {
+        background-color: steelblue;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-weight: bolder;
+    }
+    
+    .event-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+      .detail-row {
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        i {
+          width: 20px;
+          color: var(--primary);
+        }
+      }
+    }
+    
+    &.online-event {
+      border-left: 4px solid var(--success);
+    }
+    
+    .event-footer{
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .event-active {
+        color: green;
+    }
+
+    .event-inactive {
+        columns: rgb(74, 74, 74);
+    }
+  }

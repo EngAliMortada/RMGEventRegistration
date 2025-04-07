@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-2">
+        <a (click)="showActiveEvents()" class="px-4 btn btn-primary mb-4" role="button"
+            ><i></i> {{ '::EventGrid:AllEvents' | abpLocalization }}</a
+          >
+    </div>
+    <div class="col-2">
+        <a (click)="showMyEvents()" class="px-4 btn btn-primary mb-4" role="button"
+            ><i></i>{{ '::EventGrid:MyEvents' | abpLocalization }}</a
+          >
+    </div>
+
+    <div class="col-4" *ngIf="showAddNewButton()">
+        <a (click)="AddNewEvent()" class="px-4 btn btn-primary mb-4" role="button"
+            ><i></i>{{ '::EventGrid:AddNewEvent' | abpLocalization }}</a
+          >
+    </div>
+</div>  
+
+<div *ngFor="let event of displayedEvents">
+    <abp-card 
+        class="event-card" 
+        [ngClass]="{'online-event': event.isOnline, 'inactive-event': !event.isActive}">
+        
+        <abp-card-header class="card-header text-white">
+        <h5>{{event.name}}</h5>
+        </abp-card-header>
+        
+        <abp-card-body>
+        <div class="event-details">
+            <div class="detail-row">
+            <i class="fas fa-calendar-alt mr-2"></i>
+            {{event.startDate | date: 'mediumDate'}} - {{event.endDate | date: 'mediumDate'}}
+            </div>
+            
+            <div class="detail-row">
+            <i class="fas" [ngClass]="event.isOnline ? 'fa-globe' : 'fa-map-marker-alt'"></i>
+            {{event.isOnline ? 'Online Event' : event.location}}
+            </div>
+            
+            <div *ngIf="!event.isOnline" class="detail-row">
+            <i class="fas fa-users mr-2"></i>
+            {{ '::EventForm:Capacity' | abpLocalization }}: {{event.capacity}}
+            </div>
+            
+            <div *ngIf="event.link" class="detail-row">
+            <i class="fas fa-link mr-2"></i>
+            <a [href]="event.link" [target]="event.link">Event Link</a>
+            </div>
+
+            <div class="detail-row">
+                <span [ngClass]="{
+                    'event-active': event.isActive,
+                    'event-inactive': !event.isActive
+                }">
+                    {{event.isActive ? 'Active' : 'Inactive'}}
+                </span>
+            </div>
+        </div>
+        </abp-card-body>
+        
+        <abp-card-footer class="event-footer">
+
+        <a class="btn btn-secondary" role="button" (click)="openEvent(event)"
+            ><i class="fa fa-info"></i>{{ '::EventGrid:ViewDetails' | abpLocalization }}</a>
+            
+        </abp-card-footer>
+    </abp-card>
+</div>
+
+<p *ngIf="eventsEmpty">{{ '::EventGrid:NothingToShow' | abpLocalization }}</p>

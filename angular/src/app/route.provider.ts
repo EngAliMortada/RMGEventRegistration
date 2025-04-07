@@ -13,8 +13,15 @@ function configureRoutes(routesService: RoutesService) {
         name: '::Menu:Home',
         iconClass: 'fas fa-home',
         order: 1,
-        layout: eLayoutType.application,
+        layout: eLayoutType.application
       },
+      {
+        path: '/events',
+        name: '::Menu:Events',
+        iconClass: 'fas fa-calendar',
+        order: 2,
+        layout: eLayoutType.application
+      }
     ]);
   };
 }
