@@ -67,26 +67,34 @@ public class EventRegistrationDbContext :
     {
         base.OnModelCreating(builder);
 
-        base.OnModelCreating(builder);
 
         builder.Entity<Event>(b =>
         {
-            b.ToTable("Events");
-
             b.HasMany(e => e.Registrations)
-                .WithOne(r => r.Event)
-                .HasForeignKey(r => r.EventId)
-                .IsRequired();
+             .WithOne(r => r.Event)
+             .OnDelete(DeleteBehavior.NoAction);
+
+            b.HasQueryFilter(e => !e.IsDeleted);
+        });
+
+        builder.Entity<IdentityUser>(b =>
+        {
+            b.HasMany<Registration>()
+             .WithOne(r => r.User)
+             .OnDelete(DeleteBehavior.NoAction);
         });
 
         builder.Entity<Registration>(b =>
         {
-            b.ToTable("Registrations");
+            b.HasOne(r => r.Event)
+             .WithMany(e => e.Registrations)
+             .OnDelete(DeleteBehavior.NoAction); 
 
             b.HasOne(r => r.User)
-                .WithMany()
-                .HasForeignKey(r => r.UserId)
-                .IsRequired();
+             .WithMany()
+             .OnDelete(DeleteBehavior.NoAction);
+
+            b.HasQueryFilter(r => !r.IsDeleted);
         });
 
         /* Include modules to your migration db context */

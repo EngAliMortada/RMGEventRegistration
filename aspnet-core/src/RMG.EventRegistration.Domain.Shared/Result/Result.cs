@@ -8,7 +8,6 @@ namespace RMG.EventRegistration.Results
 {
     public class Result
     {
-
         public bool Succeeded { get; init; }
         public string ErrorCode { get; set; }
         public string ErrorMessage { get; set; }
@@ -26,9 +25,36 @@ namespace RMG.EventRegistration.Results
         }
     }
 
-    public class Result<T> : Result
+    public class Result<T>
     {
+        public bool Succeeded { get; init; }
+        public string ErrorCode { get; set; }
+        public string ErrorMessage { get; set; }
+        public bool IsFailed => !Succeeded;
+        public bool Warning { get; init; }
+        public bool IsWarned => this.Warning;
         public T Value { get; set; }
+    }
+
+    public class ListResult<T> : Result<T>
+    {
+        public IEnumerable<T> Values { get; set; }
+    }
+
+    public class SucceededListResult<T> : ListResult<T> 
+    {
+        public SucceededListResult() : base()
+        {
+            Succeeded = true;
+        }
+    }
+
+    public class FailedListResult<T> : ListResult<T>
+    {
+        public FailedListResult() : base()
+        {
+            Succeeded = false;
+        }
     }
 
     public class SucceededResult<T> : Result<T>

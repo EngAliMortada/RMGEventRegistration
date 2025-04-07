@@ -4,6 +4,42 @@
     "AppName": "EventRegistration",
     "Menu:Home": "الصفحة الرئيسية",
     "Welcome": "مرحباً",
-    "LongWelcomeMessage": "مرحبا بكم في التطبيق. هذا مشروع بدء تشغيل يعتمد على إطار عمل ABP. لمزيد من المعلومات ، يرجى زيارة abp.io."
+    "LongWelcomeMessage": "مرحبا بكم في التطبيق. هذا مشروع بدء تشغيل يعتمد على إطار عمل ABP. لمزيد من المعلومات ، يرجى زيارة abp.io.",
+    "Menu:Events": "الفعاليات",
+    "EventForm:Form": "واجهة الفعالية",
+    "EventForm:Name": "الاسم",
+
+    "EventForm:NameRequired": "حقل الاسم إجباري",
+    "EventForm:Capacity": "العدد الأقصى للحضور",
+    "EventForm:StartDate": "تاريخ وتوقيت البدء",
+    "EventForm:EndDate": "تاريح وتوقيت الانتهاء",
+    "EventForm:Link": "رابط الفعالية",
+    "EventForm:LinkRequired": "حقل رابط الفعالية إجباري",
+    "EventForm:Location": "الموقع",
+    "EventForm:LocationRequired": "حقل الموقع إجباري",
+    "EventForm:Online": "الفعالية على الانترنت؟",
+    "EventForm:Active": "الفعالية نشطة؟",
+
+    "EventForm:Back": "عودة",
+    "EventForm:Save": "حفظ",
+    "EventForm:Update": "تعديل",
+    "EventForm:CancelRegistration": "إلغاء التسجيل",
+    "EventForm:Delete": "حذف",
+    "EventForm:Register": "تسجيل",
+    "EventForm:CheckUsers": "عرض المسجلين",
+
+    "EventForm:UserName": "اسم المستخدم",
+    "EventForm:UserEmail": "الايميل",
+    "EventForm:RegistrationDate": "تاريخ التسجيل",
+
+    "EventGrid:AllEvents": "كافة الفعاليات",
+    "EventGrid:MyEvents": "فعالياتي",
+    "EventGrid:AddNewEvent": "إضافة فعالية جديدة",
+    "EventGrid:ViewDetails": "عرض التفاصيل",
+    "EventGrid:NothingToShow": "لا يوجد فعاليات لعرضها"
+
+
+
+
   }
 }

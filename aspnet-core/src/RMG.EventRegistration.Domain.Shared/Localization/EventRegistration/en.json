@@ -4,6 +4,39 @@
     "AppName": "EventRegistration",
     "Menu:Home": "Home",
     "Welcome": "Welcome",
-    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io."
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+
+    "Menu:Events": "Events",
+    "EventForm:Form": "ُEvents Form",
+    "EventForm:Name": "Name",
+
+    "EventForm:NameRequired": "Name is required",
+    "EventForm:Capacity": "Capacity",
+    "EventForm:StartDate": "Start Date & Time",
+    "EventForm:EndDate": "End Date & Time",
+    "EventForm:Link": "Link",
+    "EventForm:LinkRequired": "Link is required",
+    "EventForm:Location": "Location",
+    "EventForm:LocationRequired": "Location is required",
+    "EventForm:Online": "Online event?",
+    "EventForm:Active": "Active?",
+
+    "EventForm:Back": "Back",
+    "EventForm:Save": "Save",
+    "EventForm:Update": "Update",
+    "EventForm:CancelRegistration": "Cancel Registration",
+    "EventForm:Delete": "Delete",
+    "EventForm:Register": "Register",
+    "EventForm:CheckUsers": "View Registered Users",
+
+    "EventForm:UserName": "User Name",
+    "EventForm:UserEmail": "Email",
+    "EventForm:RegistrationDate": "Registration Date",
+
+    "EventGrid:AllEvents": "All Events",
+    "EventGrid:MyEvents": "My Events",
+    "EventGrid:AddNewEvent": "Add New Event",
+    "EventGrid:ViewDetails": "View Details",
+    "EventGrid:NothingToShow": "No Events to Show!"
   }
 }
